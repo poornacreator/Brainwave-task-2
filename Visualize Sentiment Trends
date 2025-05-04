@@ -1,0 +1,39 @@
+# sentiment over time
+import matplotlib.pyplot as plt
+
+# Aggregate daily average sentiment
+daily_sentiment = df.groupby(pd.Grouper(key='date', freq='D'))['sentiment'].mean()
+
+# Plot
+plt.figure(figsize=(12, 6))
+daily_sentiment.plot(color='purple')
+plt.title("Sentiment Trend Over Time")
+plt.xlabel("Date")
+plt.ylabel("Average Sentiment Score")
+plt.grid(True)
+plt.show()
+
+#sentiment distribution
+
+plt.figure(figsize=(8, 5))
+df['sentiment_label'].value_counts().plot(kind='bar', color=['green', 'red', 'blue'])
+plt.title("Sentiment Distribution")
+plt.xlabel("Sentiment")
+plt.ylabel("Number of Tweets")
+plt.xticks(rotation=0)
+plt.show()
+
+#Word Cloud for Positive/Negative Tweets
+
+from wordcloud import WordCloud
+
+# Generate word cloud for positive tweets
+positive_words = ' '.join(df[df['sentiment_label'] == 'positive']['cleaned_text'])
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate(positive_words)
+
+plt.figure(figsize=(10, 5))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis('off')
+plt.title("Word Cloud: Positive Tweets")
+plt.show()
+
