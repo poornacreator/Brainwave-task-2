@@ -1,0 +1,18 @@
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+
+nltk.download('vader_lexicon')
+sia = SentimentIntensityAnalyzer()
+
+# Get sentiment scores
+df['sentiment'] = df['cleaned_text'].apply(lambda x: sia.polarity_scores(x)['compound'])
+
+# Classify sentiment
+def get_sentiment(score):
+    if score >= 0.05:
+        return 'positive'
+    elif score <= -0.05:
+        return 'negative'
+    else:
+        return 'neutral'
+
+df['sentiment_label'] = df['sentiment'].apply(get_sentiment)
