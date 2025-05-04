@@ -3,8 +3,7 @@
 
 A Python script to analyze public sentiment on Twitter using NLP and visualize results.
 
-![Sentiment Distribution](https://i.imgur.com/4QzRk3D.png)  
-*Example Output: Sentiment Analysis Chart*
+
 
 ## Features ✨
 - Collect tweets using Twitter API
